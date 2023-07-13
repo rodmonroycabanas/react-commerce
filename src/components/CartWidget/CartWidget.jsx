@@ -1,8 +1,9 @@
-import { FaOpencart } from "react-icons/fa";
+import { BsFillBagFill } from "react-icons/bs";
+
 import "./CartWidget.css";
 
 export const CartWidget = () => (
   <div className="cart-widget">
-    <FaOpencart /> <span className="cart-widget__qty">(3)</span>
+    <BsFillBagFill /> <span className="cart-widget__qty">(3)</span>
   </div>
 );
