@@ -7,3 +7,4 @@ export const CartWidget = () => (
     <BsFillBagFill /> <span className="cart-widget__qty">(3)</span>
   </div>
 );
+
