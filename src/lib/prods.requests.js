@@ -76,6 +76,19 @@ const PRODS = [
 //      }, 5000);
 //    });
 //  };
+
+
+  import {
+    collection,
+    getDocs,
+    getDoc,
+    addDoc,
+    doc,
+    where,
+    query,
+  } from "firebase/firestore";
+  import { db } from "./config";
+
   const prodsRef = collection(db, "items");
 
   export const getProds = async (category) => {
@@ -93,26 +106,7 @@ const PRODS = [
     return prods;
   };
 
-  import {
-    collection,
-    getDocs,
-    getDoc,
-    addDoc,
-    doc,
-    where,
-    query,
-  } from "firebase/firestore";
-  import { db } from "./config";
 
-//  export const getProd = () => {
-//    //Las promesas reciben como parametro una funcion
-//    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
-//    return new Promise((res) => {
-//      setTimeout(() => {
-//        res(PRODS[0]); //Se resuelve con el array con el libro de la posicion [0]
-//      }, 1500);
-//    });
-//  };
 
     export const getprod = async (id) => {
       const document = doc(db, "items", id);
