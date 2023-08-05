@@ -1,22 +1,43 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import './App.scss'
-import { NavBar, Item, ItemCount, ItemListContainer } from './components'
-import { Detail} from './pages/Detail';
-import { Home} from './pages/Home';
+import { NavBar, ItemCount, ItemListContainer, Item } from "./components";
+import { Detail } from "./pages/Detail";
+import { Home } from "./pages/Home";
+import { Category } from "./pages/Category";
+import { CartProvider } from "./state/Cart.context";
+import { ThemeProvider } from "./state/Theme.context";
+import { Cart } from "./pages/Cart";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
+const routes = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<NavBar />}>
+      {" "}
+      {/* ROUTE padre necesita <Outlet /> */}
+      <Route path="/" element={<Home />} />
+      <Route path="/item/:id" element={<Detail />} />
+      <Route path="/category/:id" element={<Category />} />
+      <Route path="/cart" element={<Cart />} />
+    </Route>
+  )
+);
 
 function App() {
-  const handleCart = (qty) => {
-    console.log("La cantidad es", qty);
-  };
-
   return (
     <div>
-      <NavBar/>
-      { <Home />}
+      <ThemeProvider>
+        <CartProvider>
+          <RouterProvider router={routes} />
+        </CartProvider>
+      </ThemeProvider>
     </div>
-  )
+  );
 }
 
 export default App

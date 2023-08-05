@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProds } from "../lib/prods.requests";
-import { ItemListContainer } from "../components";
+import { ItemListContainer, Loader } from "../components";
 
 export const Home = () => {
   const [products, setProducts] = useState([]); //Importante iniciar en array para que no falle el metodo map
@@ -21,11 +21,14 @@ export const Home = () => {
 
   return (
     <div>
-      
-      <div className="container">
-        <h5>{isLoading ? "Cargando ..." : ""}</h5>
-        <ItemListContainer products={products} />
-      </div>
+
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="container">
+          <ItemListContainer products={products} />
+        </div>
+      )}
     </div>
   );
 };

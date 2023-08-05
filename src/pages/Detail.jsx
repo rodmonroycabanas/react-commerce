@@ -1,18 +1,37 @@
 import { useEffect, useState } from "react";
-import { ItemCount } from "../components";
+import { Item, ItemCount, Loader } from "../components";
 import { getProd } from "../lib/prods.requests";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCartContext } from "../state/Cart.context";
 
 export const Detail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [prod, setProd] = useState({});
 
+  const { addProduct, itemInCart } = useCartContext();
+
   useEffect(() => {
-    //Peticion detalle producto
-    getProd().then((res) => {
-      //Se guarda el producto del objeto
+    getProd(id).then((res) => {
+      if(!res) return navigate('/');
       setProd(res);
     });
   }, []);
 
+  //useCallback //
+  /* 
+    const funcion = useCallback(() => {},[array de dependencias ])
+  */
+
+    const handleAdd = useCallback(
+      (qty) => {
+        addProduct(prod, qty);
+      },
+      [addProduct, prod]
+    );
+  
+    if (!Object.keys(prod).length) return <Loader />;
+  
   return (
     <div className="container">
       <div className="detail">
@@ -26,15 +45,18 @@ export const Detail = () => {
 
           <span className="detail__info-price">
             $
-            {(prod.price || 0).toLocaleString("es-CO", {
+            {(prod.price || 0).toLocaleString("es-MX", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </span>
+          <span className="detail__info-stock">¡Ultimas piezas!</span>
+           
 
-          <span className="detail__info-stock">¡Quedan solo {prod.stock}!</span>
-
-          <ItemCount stock={prod.stock} onAdd={() => alert("Comprados")} />
+          <ItemCount
+            stock={book.stock - (itemInCart?.(id)?.qty || 0)} 
+            onAdd={handleAdd}
+          />
         </div>
       </div>
     </div>
