@@ -107,8 +107,17 @@ const PRODS = [
   };
 
 
+//  export const getProd = () => {
+//    //Las promesas reciben como parametro una funcion
+//    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
+//    return new Promise((res) => {
+//      setTimeout(() => {
+//        res(PRODS[0]); //Se resuelve con el array con el libro de la posicion [0]
+//      }, 1500);
+//    });
+//  };
 
-    export const getprod = async (id) => {
+    export const getProd = async (id) => {
       const document = doc(db, "items", id);
       const docSnap = await getDoc(document);
       if (docSnap.exists()) return { id: docSnap.id, ...docSnap.data() };

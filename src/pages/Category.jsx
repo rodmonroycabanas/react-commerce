@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getBooks } from "../lib/books.requests";
+import { getBooks } from "../lib/prods.requests";
 import { ItemListContainer } from "../components";
 
 export const Category = () => {
@@ -11,7 +11,7 @@ export const Category = () => {
   useEffect(() => {
     setProducts([]);
     setIsLoading(true);
-    getBooks(id).then((res) => {
+    getProds(id).then((res) => {
       setIsLoading(false);
       setProducts(res);
     });
