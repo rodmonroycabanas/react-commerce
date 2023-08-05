@@ -65,24 +65,65 @@ const PRODS = [
       stock: 6,
     },
   ];
-  //ESTO VA A CAMABIAR
+//  //ESTO VA A CAMABIAR
   //Simulación de una petición de red que nunca falla
-  export const getProds = () => {
-    //Las promesas reciben como parametro una funcion
-    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(PRODS); //Se resuelve con el array de libros
-      }, 5000);
+//  export const getProds = () => {
+//    //Las promesas reciben como parametro una funcion
+//    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
+//    return new Promise((res) => {
+//      setTimeout(() => {
+//        res(PRODS); //Se resuelve con el array de libros
+//      }, 5000);
+//    });
+//  };
+  const prodsRef = collection(db, "items");
+
+  export const getProds = async (category) => {
+    const q = category
+      ? query(prodsRef, where("category", "==", category))
+      : prodsRef;
+
+    let prods = [];
+    const querySnapshot = await getDocs(q);
+    //forEach es un metodo del retorno de getDocs y no es el de javascript
+    querySnapshot.forEach((doc) => {
+      prods = [...prods, { ...doc.data(), id: doc.id }];
     });
+
+    return prods;
   };
-  
-  export const getProd = () => {
-    //Las promesas reciben como parametro una funcion
-    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(PRODS[0]); //Se resuelve con el array con el libro de la posicion [0]
-      }, 1500);
-    });
-  };
+
+  import {
+    collection,
+    getDocs,
+    getDoc,
+    addDoc,
+    doc,
+    where,
+    query,
+  } from "firebase/firestore";
+  import { db } from "./config";
+
+//  export const getProd = () => {
+//    //Las promesas reciben como parametro una funcion
+//    //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
+//    return new Promise((res) => {
+//      setTimeout(() => {
+//        res(PRODS[0]); //Se resuelve con el array con el libro de la posicion [0]
+//      }, 1500);
+//    });
+//  };
+
+    export const getprod = async (id) => {
+      const document = doc(db, "items", id);
+      const docSnap = await getDoc(document);
+      if (docSnap.exists()) return { id: docSnap.id, ...docSnap.data() };
+
+      return null;
+    };
+
+    export const cargarData = async () => {
+      PRODS.forEach(async (prod) => {
+        await addDoc(prodsRef, prod)
+      })
+}
