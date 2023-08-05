@@ -4,7 +4,7 @@ import { CartWidget } from "../CartWidget/CartWidget";
 import { NavLink, Outlet } from "react-router-dom";
 
 export const NavBar = () => {
-  const logo = "https://funko.com/on/demandware.static/Sites-FunkoUS-Site/-/default/dw2acc256f/images/funko/svg/site-logo.svg";
+  const logo = "https://www.aitaikuji.com/static/version1691023070/frontend/Aitaikuji/Custom/en_US/images/logo.svg";
   return (
     <>
     <header className="navbar">
