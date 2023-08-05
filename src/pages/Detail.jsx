@@ -54,7 +54,7 @@ export const Detail = () => {
            
 
           <ItemCount
-            stock={book.stock - (itemInCart?.(id)?.qty || 0)} 
+            stock={prod.stock - (itemInCart?.(id)?.qty || 0)} 
             onAdd={handleAdd}
           />
         </div>

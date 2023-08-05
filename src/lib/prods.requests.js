@@ -67,22 +67,25 @@ const PRODS = [
   ];
  //ESTO VA A CAMABIAR
   //Simulación de una petición de red que nunca falla
- export const getProds = () => {
+ export const getProds = (id) => {
    //Las promesas reciben como parametro una funcion
-   //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
+   const _prods = id
+   ? PRODS.filter((prod) => prod.category.toLowerCase() === id)
+   : PRODS;
+
    return new Promise((res) => {
      setTimeout(() => {
-       res(PRODS); //Se resuelve con el array de libros
-     }, 5000);
+       res(_prods); //Se resuelve con el array de libros
+     }, 500);
    });
  };
 
- export const getProd = () => {
-   //Las promesas reciben como parametro una funcion
-   //Esta funcion a su vez recibe como parametro resolve y rejected, con el fin de mandar un dato correcto o un error.
-   return new Promise((res) => {
+ export const getProd = (id) => {
+    const prod = PRODS.filter((prod) => prod.id === id)[0];
+    return new Promise((res) => {
      setTimeout(() => {
-       res(PRODS[0]); //Se resuelve con el array con el libro de la posicion [0]
+       //res(PRODS[3]); 
+       res(prod); 
      }, 1500);
    });
  };
