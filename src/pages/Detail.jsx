@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Item, ItemCount, Loader } from "../components";
-import { getProd } from "../lib/prods.requests";
+import { getProd } from "../lib/prods.requests.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCartContext } from "../state/Cart.context";
 
