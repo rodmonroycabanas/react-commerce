@@ -10,9 +10,10 @@ export const Detail = () => {
   const [prod, setProd] = useState({});
 
   const { addProduct, itemInCart } = useCartContext();
-
+  //console.log("id " + id)
+  //console.log(useParams());
   useEffect(() => {
-    getProd(id).then((res) => {
+    getProd(+id).then((res) => {
       if(!res) return navigate('/');
       setProd(res);
     });

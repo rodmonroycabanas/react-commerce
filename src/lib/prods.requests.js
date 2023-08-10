@@ -26,7 +26,7 @@ const PRODS = [
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur harum non voluptas eius earum. Reiciendis error a quod impedit ex!",
   
-      category: "Banpresto ",
+      category: "Banpresto",
       price: 809.00,
       stock: 5,
       img: "https://megamitoys.com.mx/cdn/shop/products/88296-Dragon-Ball-Super-Super-Hero-Blood-Of-Saiyans-Specialxiv-00_2400x2400_ee4f0989-9f9d-4ac0-851e-ec2feaab118c_1024x1024.webp?v=1678216897",
@@ -70,8 +70,13 @@ const PRODS = [
  export const getProds = (id) => {
    //Las promesas reciben como parametro una funcion
    const _prods = id
-   ? PRODS.filter((prod) => prod.category.toLowerCase() === id)
+   ? PRODS.filter((prod) => prod.category.toLowerCase() === id.toLowerCase())
    : PRODS;
+
+   console.log(_prods);
+   console.log(PRODS[0].category);
+   console.log("id " + id)
+   console.log(PRODS[0].category === id);
 
    return new Promise((res) => {
      setTimeout(() => {
@@ -82,6 +87,7 @@ const PRODS = [
 
  export const getProd = (id) => {
     const prod = PRODS.filter((prod) => prod.id === id)[0];
+    //console.log("id " + id)
     return new Promise((res) => {
      setTimeout(() => {
        //res(PRODS[3]); 

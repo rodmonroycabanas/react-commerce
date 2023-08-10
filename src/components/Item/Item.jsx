@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const Item = ({   img,  category,  title,  id,  price}) => {
   const navigate = useNavigate();
   return (
-    <div className="item" onClick={()=> navigate('/item/{$id}')}>
+    <div className="item" onClick={()=> navigate(`/item/${id}`)}>
       <div className="item__img">
         <img src={img} />
       </div>
