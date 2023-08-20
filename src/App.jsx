@@ -15,6 +15,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
+
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<NavBar />}>
